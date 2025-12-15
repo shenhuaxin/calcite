@@ -158,10 +158,10 @@ val javadocAggregateIncludingTests by tasks.registering(Javadoc::class) {
     setDestinationDir(file("$buildDir/docs/javadocAggregateIncludingTests"))
 }
 
-val adaptersForSqlline = listOf(
-    ":babel", ":cassandra", ":druid", ":elasticsearch", ":file", ":geode", ":kafka", ":mongodb",
-    ":pig", ":piglet", ":plus", ":redis", ":spark", ":splunk"
-)
+//val adaptersForSqlline = listOf(
+//    ":babel", ":cassandra", ":druid", ":elasticsearch", ":file", ":geode", ":kafka", ":mongodb",
+//    ":pig", ":piglet", ":plus", ":redis", ":spark", ":splunk"
+//)
 
 val dataSetsForSqlline = listOf(
     "net.hydromatic:foodmart-data-hsqldb",
@@ -176,9 +176,9 @@ val sqllineClasspath by configurations.creating {
 dependencies {
     sqllineClasspath(platform(project(":bom")))
     sqllineClasspath("sqlline:sqlline")
-    for (p in adaptersForSqlline) {
-        sqllineClasspath(project(p))
-    }
+//    for (p in adaptersForSqlline) {
+//        sqllineClasspath(project(p))
+//    }
     for (m in dataSetsForSqlline) {
         sqllineClasspath(module(m))
     }

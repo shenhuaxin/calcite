@@ -49,25 +49,8 @@ include(
     "bom",
     "release",
     "babel",
-    "cassandra",
     "core",
-    "druid",
-    "elasticsearch",
-    "example:csv",
-    "example:function",
-    "file",
-    "geode",
-    "kafka",
-    "linq4j",
-    "mongodb",
-    "pig",
-    "piglet",
-    "plus",
-    "redis",
-    "server",
-    "spark",
-    "splunk",
-    "ubenchmark"
+    "linq4j"
 )
 
 // See https://github.com/gradle/gradle/issues/1348#issuecomment-284758705 and
