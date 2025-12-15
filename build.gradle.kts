@@ -29,7 +29,9 @@ import org.apache.calcite.buildtools.buildext.dsl.ParenthesisBalancer
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
-    publishing
+    java
+    maven
+     publishing
     // Verification
     checkstyle
     calcite.buildext
@@ -97,7 +99,8 @@ tasks.validateBeforeBuildingReleaseArtifacts {
 
 val String.v: String get() = rootProject.extra["$this.version"] as String
 
-val buildVersion = "calcite".v + releaseParams.snapshotSuffix
+//val buildVersion = "calcite".v + releaseParams.snapshotSuffix
+val buildVersion = "calcite".v
 
 println("Building Apache Calcite $buildVersion")
 
@@ -158,11 +161,6 @@ val javadocAggregateIncludingTests by tasks.registering(Javadoc::class) {
     setDestinationDir(file("$buildDir/docs/javadocAggregateIncludingTests"))
 }
 
-//val adaptersForSqlline = listOf(
-//    ":babel", ":cassandra", ":druid", ":elasticsearch", ":file", ":geode", ":kafka", ":mongodb",
-//    ":pig", ":piglet", ":plus", ":redis", ":spark", ":splunk"
-//)
-
 val dataSetsForSqlline = listOf(
     "net.hydromatic:foodmart-data-hsqldb",
     "net.hydromatic:scott-data-hsqldb",
@@ -176,9 +174,6 @@ val sqllineClasspath by configurations.creating {
 dependencies {
     sqllineClasspath(platform(project(":bom")))
     sqllineClasspath("sqlline:sqlline")
-//    for (p in adaptersForSqlline) {
-//        sqllineClasspath(project(p))
-//    }
     for (m in dataSetsForSqlline) {
         sqllineClasspath(module(m))
     }
