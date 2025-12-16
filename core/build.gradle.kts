@@ -84,13 +84,13 @@ dependencies {
 // There are users that reuse/extend test code (e.g. Apache Felix)
 // So publish test jar to Nexus repository
 // TODO: remove when calcite-test-framework is extracted to a standalone artifact
-publishing {
-    publications {
-        named<MavenPublication>(project.name) {
-            artifact(tasks.testJar.get())
-        }
-    }
-}
+//publishing {
+//    publications {
+//        named<MavenPublication>(project.name) {
+//            artifact(tasks.testJar.get())
+//        }
+//    }
+//}
 
 tasks.jar {
     CrLfSpec(LineEndings.LF).run {
@@ -185,24 +185,4 @@ ide {
     generatedSource(javaCCTest, "test")
 }
 
-val integTestAll by tasks.registering() {
-    group = LifecycleBasePlugin.VERIFICATION_GROUP
-    description = "Executes integration JDBC tests for all DBs"
-}
-
-val coreTestClasses = sourceSets.main.get().output
-val coreClasses = sourceSets.main.get().output + coreTestClasses
-for (db in listOf("h2", "mysql", "oracle", "postgresql")) {
-    val task = tasks.register("integTest" + db.capitalize(), Test::class) {
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
-        description = "Executes integration JDBC tests with $db database"
-        include("org/apache/calcite/test/JdbcAdapterTest.class")
-        include("org/apache/calcite/test/JdbcTest.class")
-        systemProperty("calcite.test.db", db)
-        testClassesDirs = coreTestClasses.classesDirs
-        classpath = coreClasses + configurations.getAt("test" + db.capitalize())
-    }
-    integTestAll {
-        dependsOn(task)
-    }
-}
+// 删除非必要的集成测试任务

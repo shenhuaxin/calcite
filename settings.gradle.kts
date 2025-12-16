@@ -48,7 +48,6 @@ rootProject.name = "calcite"
 include(
     "bom",
     "release",
-    "babel",
     "core",
     "linq4j"
 )
