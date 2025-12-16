@@ -81,16 +81,6 @@ dependencies {
     testRuntimeOnly("org.slf4j:slf4j-log4j12")
 }
 
-// There are users that reuse/extend test code (e.g. Apache Felix)
-// So publish test jar to Nexus repository
-// TODO: remove when calcite-test-framework is extracted to a standalone artifact
-//publishing {
-//    publications {
-//        named<MavenPublication>(project.name) {
-//            artifact(tasks.testJar.get())
-//        }
-//    }
-//}
 
 tasks.jar {
     CrLfSpec(LineEndings.LF).run {
@@ -135,15 +125,15 @@ val versionClass by tasks.registering(Sync::class) {
     }
 }
 
-ide {
-    generatedJavaSources(versionClass.get(), generatedVersionDir)
-}
-
-sourceSets {
-    main {
-        resources.exclude("version/org-apache-calcite-jdbc.properties")
-    }
-}
+//ide {
+//    generatedJavaSources(versionClass.get(), generatedVersionDir)
+//}
+//
+//sourceSets {
+//    main {
+//        resources.exclude("version/org-apache-calcite-jdbc.properties")
+//    }
+//}
 
 tasks.withType<Checkstyle>().configureEach {
     exclude("org/apache/calcite/runtime/Resources.java")
@@ -177,12 +167,12 @@ val javaCCTest by tasks.registering(org.apache.calcite.buildtools.javacc.JavaCCT
     packageName.set("org.apache.calcite.sql.parser.parserextensiontesting")
 }
 
-ide {
-    fun generatedSource(javacc: TaskProvider<org.apache.calcite.buildtools.javacc.JavaCCTask>, sourceSet: String) =
-        generatedJavaSources(javacc.get(), javacc.get().output.get().asFile, sourceSets.named(sourceSet))
-
-    generatedSource(javaCCMain, "main")
-    generatedSource(javaCCTest, "test")
-}
+//ide {
+//    fun generatedSource(javacc: TaskProvider<org.apache.calcite.buildtools.javacc.JavaCCTask>, sourceSet: String) =
+//        generatedJavaSources(javacc.get(), javacc.get().output.get().asFile, sourceSets.named(sourceSet))
+//
+//    generatedSource(javaCCMain, "main")
+//    generatedSource(javaCCTest, "test")
+//}
 
 // 删除非必要的集成测试任务
