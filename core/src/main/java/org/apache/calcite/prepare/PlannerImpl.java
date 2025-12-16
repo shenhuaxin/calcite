@@ -162,7 +162,7 @@ public class PlannerImpl implements Planner, ViewExpander {
     state = State.STATE_1_RESET;
   }
 
-  private void ready() {
+  public void ready() {
     switch (state) {
     case STATE_0_CLOSED:
       reset();
@@ -209,7 +209,7 @@ public class PlannerImpl implements Planner, ViewExpander {
   }
 
   public SqlNode validate(SqlNode sqlNode) throws ValidationException {
-    ensure(State.STATE_3_PARSED);
+//    ensure(State.STATE_3_PARSED);
     this.validator = createSqlValidator(createCatalogReader());
     try {
       validatedSqlNode = validator.validate(sqlNode);
@@ -234,7 +234,7 @@ public class PlannerImpl implements Planner, ViewExpander {
   }
 
   public RelRoot rel(SqlNode sql) {
-    ensure(State.STATE_4_VALIDATED);
+//    ensure(State.STATE_4_VALIDATED);
     assert validatedSqlNode != null;
     final RexBuilder rexBuilder = createRexBuilder();
     final RelOptCluster cluster = RelOptCluster.create(planner, rexBuilder);
