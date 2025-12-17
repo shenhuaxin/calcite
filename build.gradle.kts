@@ -28,7 +28,7 @@ plugins {
     checkstyle
 //    calcite.buildext
     // IDE configuration
-    id("org.jetbrains.gradle.plugin.idea-ext")
+//    id("org.jetbrains.gradle.plugin.idea-ext")
     id("com.github.vlsi.ide")
 }
 
