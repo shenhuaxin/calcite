@@ -173,6 +173,19 @@ allprojects {
                 return@configure
             }
 
+            // 只发布core-rule模块
+            if (project.name != "core-rule") {
+                return@configure
+            }
+
+            // 配置发布仓库（私服）
+            repositories {
+                maven {
+                    // 私服URL地址
+                    url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+                }
+            }
+
             publications {
                 create<MavenPublication>(project.name) {
                     artifactId = archivesBaseName
