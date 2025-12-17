@@ -21,8 +21,8 @@ plugins {
     kotlin("jvm")
     id("com.github.vlsi.crlf")
     id("com.github.vlsi.ide")
-    calcite.fmpp
-    calcite.javacc
+//    calcite.fmpp
+//    calcite.javacc
 }
 
 val integrationTestConfig: (Configuration.() -> Unit) = {
@@ -139,33 +139,33 @@ tasks.withType<Checkstyle>().configureEach {
     exclude("org/apache/calcite/runtime/Resources.java")
 }
 
-val fmppMain by tasks.registering(org.apache.calcite.buildtools.fmpp.FmppTask::class) {
-    config.set(file("src/main/codegen/config.fmpp"))
-    templates.set(file("src/main/codegen/templates"))
-}
+//val fmppMain by tasks.registering(org.apache.calcite.buildtools.fmpp.FmppTask::class) {
+//    config.set(file("src/main/codegen/config.fmpp"))
+//    templates.set(file("src/main/codegen/templates"))
+//}
 
-val javaCCMain by tasks.registering(org.apache.calcite.buildtools.javacc.JavaCCTask::class) {
-    dependsOn(fmppMain)
-    val parserFile = fmppMain.map {
-        it.output.asFileTree.matching { include("**/Parser.jj") }
-    }
-    inputFile.from(parserFile)
-    packageName.set("org.apache.calcite.sql.parser.impl")
-}
+//val javaCCMain by tasks.registering(org.apache.calcite.buildtools.javacc.JavaCCTask::class) {
+//    dependsOn(fmppMain)
+//    val parserFile = fmppMain.map {
+//        it.output.asFileTree.matching { include("**/Parser.jj") }
+//    }
+//    inputFile.from(parserFile)
+//    packageName.set("org.apache.calcite.sql.parser.impl")
+//}
 
-val fmppTest by tasks.registering(org.apache.calcite.buildtools.fmpp.FmppTask::class) {
-    config.set(file("src/test/codegen/config.fmpp"))
-    templates.set(file("src/main/codegen/templates"))
-}
+//val fmppTest by tasks.registering(org.apache.calcite.buildtools.fmpp.FmppTask::class) {
+//    config.set(file("src/test/codegen/config.fmpp"))
+//    templates.set(file("src/main/codegen/templates"))
+//}
 
-val javaCCTest by tasks.registering(org.apache.calcite.buildtools.javacc.JavaCCTask::class) {
-    dependsOn(fmppTest)
-    val parserFile = fmppTest.map {
-        it.output.asFileTree.matching { include("**/Parser.jj") }
-    }
-    inputFile.from(parserFile)
-    packageName.set("org.apache.calcite.sql.parser.parserextensiontesting")
-}
+//val javaCCTest by tasks.registering(org.apache.calcite.buildtools.javacc.JavaCCTask::class) {
+//    dependsOn(fmppTest)
+//    val parserFile = fmppTest.map {
+//        it.output.asFileTree.matching { include("**/Parser.jj") }
+//    }
+//    inputFile.from(parserFile)
+//    packageName.set("org.apache.calcite.sql.parser.parserextensiontesting")
+//}
 
 //ide {
 //    fun generatedSource(javacc: TaskProvider<org.apache.calcite.buildtools.javacc.JavaCCTask>, sourceSet: String) =
