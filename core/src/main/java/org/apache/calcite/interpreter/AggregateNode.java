@@ -40,6 +40,7 @@ import org.apache.calcite.sql.fun.SqlStdOperatorTable;
 import org.apache.calcite.sql.validate.SqlConformance;
 import org.apache.calcite.sql.validate.SqlConformanceEnum;
 import org.apache.calcite.util.ImmutableBitSet;
+import org.apache.calcite.util.NumberUtil;
 import org.apache.calcite.util.Pair;
 
 import com.google.common.collect.ImmutableList;
@@ -130,8 +131,10 @@ public class AggregateNode extends AbstractSingleNode<Aggregate> {
         clazz = IntSum.class;
         break;
       case BIGINT:
-      default:
         clazz = LongSum.class;
+        break;
+      default:
+        clazz = DefaultSum.class;
         break;
       }
       if (call.getAggregation() == SqlStdOperatorTable.SUM) {
@@ -160,8 +163,11 @@ public class AggregateNode extends AbstractSingleNode<Aggregate> {
       case BOOLEAN:
         clazz = MinBoolean.class;
         break;
-      default:
+      case BIGINT:
         clazz = MinLong.class;
+        break;
+      default:
+        clazz = MinDefault.class;
         break;
       }
       return new UdaAccumulatorFactory(
@@ -182,8 +188,11 @@ public class AggregateNode extends AbstractSingleNode<Aggregate> {
       case DECIMAL:
         clazz = MaxBigDecimal.class;
         break;
-      default:
+      case BIGINT:
         clazz = MaxLong.class;
+        break;
+      default:
+        clazz = MaxDefault.class;
         break;
       }
       return new UdaAccumulatorFactory(
@@ -463,6 +472,8 @@ public class AggregateNode extends AbstractSingleNode<Aggregate> {
     }
   }
 
+
+
   /** Implementation of {@code SUM} over DOUBLE values as a user-defined
    * aggregate. */
   public static class DoubleSum {
@@ -494,6 +505,27 @@ public class AggregateNode extends AbstractSingleNode<Aggregate> {
 
     public BigDecimal add(BigDecimal accumulator, BigDecimal v) {
       return accumulator.add(v);
+    }
+
+    public BigDecimal merge(BigDecimal accumulator0, BigDecimal accumulator01) {
+      return add(accumulator0, accumulator01);
+    }
+
+    public BigDecimal result(BigDecimal accumulator) {
+      return accumulator;
+    }
+  }
+
+  public static class DefaultSum {
+    public DefaultSum(){
+    }
+
+    public BigDecimal init() {
+      return new BigDecimal("0");
+    }
+
+    public BigDecimal add(BigDecimal accumulator, Number v) {
+      return accumulator.add(NumberUtil.toBigDecimal(v));
     }
 
     public BigDecimal merge(BigDecimal accumulator0, BigDecimal accumulator01) {
@@ -607,6 +639,17 @@ public class AggregateNode extends AbstractSingleNode<Aggregate> {
     }
   }
 
+
+  public static class MinDefault extends NumericComparison<Number> {
+    public MinDefault() {
+      super(new BigDecimal(Double.MAX_VALUE), MinDefault::min);
+    }
+
+    public static BigDecimal min(Number a, Number b) {
+      return NumberUtil.toBigDecimal(a).min(NumberUtil.toBigDecimal(b));
+    }
+  }
+
   /** Implementation of {@code MAX} function to calculate the maximum of
    * {@code integer} values as a user-defined aggregate.
    */
@@ -653,6 +696,16 @@ public class AggregateNode extends AbstractSingleNode<Aggregate> {
 
     public static BigDecimal max(BigDecimal a, BigDecimal b) {
       return a.max(b);
+    }
+  }
+
+  public static class MaxDefault extends NumericComparison<Number> {
+    public MaxDefault() {
+      super(new BigDecimal(Double.MIN_VALUE), MaxDefault::max);
+    }
+
+    public static BigDecimal max(Number a, Number b) {
+      return NumberUtil.toBigDecimal(a).max(NumberUtil.toBigDecimal(b));
     }
   }
 
