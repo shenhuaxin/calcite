@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.github.vlsi.gradle.crlf.CrLfSpec
-import com.github.vlsi.gradle.crlf.LineEndings
+//import com.github.vlsi.gradle.crlf.CrLfSpec
+//import com.github.vlsi.gradle.crlf.LineEndings
 
 plugins {
     kotlin("jvm")
-    id("com.github.vlsi.crlf")
-    id("com.github.vlsi.ide")
+//    id("com.github.vlsi.crlf")
+//    id("com.github.vlsi.ide")
 //    calcite.fmpp
 //    calcite.javacc
 }
@@ -82,13 +82,13 @@ dependencies {
 }
 
 
-tasks.jar {
-    CrLfSpec(LineEndings.LF).run {
-        into("codegen") {
-            textFrom("$projectDir/src/main/codegen")
-        }
-    }
-}
+//tasks.jar {
+//    CrLfSpec(LineEndings.LF).run {
+//        into("codegen") {
+//            textFrom("$projectDir/src/main/codegen")
+//        }
+//    }
+//}
 
 val generatedVersionDir = File(buildDir, "generated/sources/version")
 val versionClass by tasks.registering(Sync::class) {

@@ -29,7 +29,7 @@ plugins {
 //    calcite.buildext
     // IDE configuration
 //    id("org.jetbrains.gradle.plugin.idea-ext")
-    id("com.github.vlsi.ide")
+//    id("com.github.vlsi.ide")
 }
 
 repositories {
