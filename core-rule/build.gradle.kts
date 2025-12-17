@@ -18,7 +18,7 @@
 //import com.github.vlsi.gradle.crlf.LineEndings
 
 plugins {
-    kotlin("jvm")
+//    kotlin("jvm")
 //    id("com.github.vlsi.crlf")
 //    id("com.github.vlsi.ide")
 //    calcite.fmpp
@@ -75,9 +75,9 @@ dependencies {
     testImplementation("org.hsqldb:hsqldb")
     testImplementation("org.incava:java-diff")
     testImplementation("sqlline:sqlline")
-    testImplementation(kotlin("stdlib-jdk8"))
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit5"))
+//    testImplementation(kotlin("stdlib-jdk8"))
+//    testImplementation(kotlin("test"))
+//    testImplementation(kotlin("test-junit5"))
     testRuntimeOnly("org.slf4j:slf4j-log4j12")
 }
 
