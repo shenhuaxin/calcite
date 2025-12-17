@@ -37,9 +37,9 @@ pluginManagement {
     }
 }
 
-plugins {
-    `gradle-enterprise`
-}
+//plugins {
+//    `gradle-enterprise`
+//}
 
 // This is the name of a current project
 // Note: it cannot be inferred from the directory name as developer might clone Calcite to calcite_tmp folder
@@ -66,15 +66,15 @@ fun property(name: String) =
 
 val isCiServer = System.getenv().containsKey("CI")
 
-if (isCiServer) {
-    gradleEnterprise {
-        buildScan {
-            termsOfServiceUrl = "https://gradle.com/terms-of-service"
-            termsOfServiceAgree = "yes"
-            tag("CI")
-        }
-    }
-}
+//if (isCiServer) {
+//    gradleEnterprise {
+//        buildScan {
+//            termsOfServiceUrl = "https://gradle.com/terms-of-service"
+//            termsOfServiceAgree = "yes"
+//            tag("CI")
+//        }
+//    }
+//}
 
 // Cache build artifacts, so expensive operations do not need to be re-computed
 buildCache {
