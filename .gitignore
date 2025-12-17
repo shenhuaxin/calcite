@@ -25,7 +25,7 @@
 /buildSrc/build
 /buildSrc/subprojects/*/build
 linq4j/bin
-core/bin
+core-rule/bin
 .vscode
 
 # IDEA

@@ -217,36 +217,6 @@ allprojects {
                         name.set(
                             (project.findProperty("artifact.name") as? String) ?: "Calcite ${project.name.capitalize()}"
                         )
-                        description.set(project.description ?: "Calcite ${project.name.capitalize()}")
-                        inceptionYear.set("2012")
-                        url.set("https://calcite.apache.org")
-                        licenses {
-                            license {
-                                name.set("The Apache License, Version 2.0")
-                                url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-                                comments.set("A business-friendly OSS license")
-                                distribution.set("repo")
-                            }
-                        }
-                        issueManagement {
-                            system.set("Jira")
-                            url.set("https://issues.apache.org/jira/browse/CALCITE")
-                        }
-                        mailingLists {
-                            mailingList {
-                                name.set("Apache Calcite developers list")
-                                subscribe.set("dev-subscribe@calcite.apache.org")
-                                unsubscribe.set("dev-unsubscribe@calcite.apache.org")
-                                post.set("dev@calcite.apache.org")
-                                archive.set("https://lists.apache.org/list.html?dev@calcite.apache.org")
-                            }
-                        }
-                        scm {
-                            connection.set("scm:git:https://gitbox.apache.org/repos/asf/calcite.git")
-                            developerConnection.set("scm:git:https://gitbox.apache.org/repos/asf/calcite.git")
-                            url.set("https://github.com/apache/calcite")
-                            tag.set("HEAD")
-                        }
                     }
                 }
             }
