@@ -36,7 +36,7 @@ repositories {
     // At least for RAT
     maven {
         // 私服URL地址
-        url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+        url = uri("https://nexus.baocloud.cn/content/groups/public/")
     }
 }
 
@@ -96,7 +96,7 @@ allprojects {
         // RAT and Autostyle dependencies
         maven {
             // 私服URL地址
-            url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+            url = uri("https://nexus.baocloud.cn/content/groups/public/")
         }
     }
 
@@ -125,7 +125,7 @@ allprojects {
             mavenLocal()
             maven {
                 // 私服URL地址
-                url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+                url = uri("https://nexus.baocloud.cn/content/groups/public/")
             }
         }
         val sourceSets: SourceSetContainer by project
