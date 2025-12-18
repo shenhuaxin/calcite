@@ -34,7 +34,10 @@ plugins {
 
 repositories {
     // At least for RAT
-    mavenCentral()
+    maven {
+        // 私服URL地址
+        url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+    }
 }
 
 fun reportsForHumans() = !(System.getenv()["CI"]?.toBoolean() ?: false)
@@ -91,7 +94,10 @@ allprojects {
 
     repositories {
         // RAT and Autostyle dependencies
-        mavenCentral()
+        maven {
+            // 私服URL地址
+            url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+        }
     }
 
     val javaUsed = file("src/main/java").isDirectory
@@ -117,7 +123,10 @@ allprojects {
 
         repositories {
             mavenLocal()
-            mavenCentral()
+            maven {
+                // 私服URL地址
+                url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+            }
         }
         val sourceSets: SourceSetContainer by project
 
