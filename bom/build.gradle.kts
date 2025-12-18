@@ -41,6 +41,8 @@ fun DependencyConstraintHandlerScope.runtimev(
 dependencies {
     // Parenthesis are needed here: https://github.com/gradle/gradle/issues/9248
     (constraints) {
+        apiv("org.apache.calcite:calcite-linq4j", "calcite-linq4j")
+
         // api means "the dependency is for both compilation and runtime"
         // runtime means "the dependency is only for runtime, not for compilation"
         // In other words, marking dependency as "runtime" would avoid accidental

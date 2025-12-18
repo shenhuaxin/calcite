@@ -24,7 +24,7 @@
 /example/*/build
 /buildSrc/build
 /buildSrc/subprojects/*/build
-linq4j/bin
+linq4j-rule/bin
 core-rule/bin
 .vscode
 

@@ -192,6 +192,10 @@ allprojects {
                 maven {
                     // 私服URL地址
                     url = uri("http://nexus.baocloud.cn/content/repositories/releases/")
+                    credentials {
+                        username = "admin"  // 替换为实际用户名
+                        password = "04sr12WD0#Ne"    // 替换为实际密码
+                    }
                 }
             }
 

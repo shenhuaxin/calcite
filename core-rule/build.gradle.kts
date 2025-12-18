@@ -37,7 +37,7 @@ val testPostgresql by configurations.creating(integrationTestConfig)
 val testMysql by configurations.creating(integrationTestConfig)
 
 dependencies {
-    api(project(":linq4j"))
+    api("org.apache.calcite:calcite-linq4j")
 
     api("com.fasterxml.jackson.core:jackson-annotations")
     api("org.apache.calcite.avatica:avatica-core")
